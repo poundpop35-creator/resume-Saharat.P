@@ -410,6 +410,50 @@
 
     .training-body p { font-size: 0.84rem; color: var(--muted); }
 
+    /* ─── FREELANCE SEPARATOR ─────────────────────── */
+    .freelance-divider {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 0 0 4rem;
+    }
+
+    .freelance-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #b8d4f0, transparent);
+    }
+
+    .freelance-divider-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .freelance-divider-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(90deg, #1565c0, #00838f);
+      padding: 0.3rem 1.1rem;
+      border-radius: 999px;
+    }
+
+    .freelance-divider-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .freelance-wrapper {
+      background: linear-gradient(180deg, #eaf3ff 0%, #f8f4ee 100%);
+      border-top: 2px solid #cce0f5;
+      margin: 0 -1.5rem;
+      padding: 4rem 1.5rem 0;
+    }
+
     /* ─── FOOTER ───────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
@@ -454,7 +498,7 @@
 <!-- ══ NAV ════════════════════════════════════════════ -->
 <nav>
   <div class="nav-inner">
-    <span class="nav-logo">สหรัฐ เพชรณิชกุล</span>
+    <span class="nav-logo">กรมวิทยาศาสตร์การแพทย์ กระทรวงสาธารณสุข</span>
     <ul class="nav-links">
       <li><a href="#policy">นโยบายและแผน</a></li>
       <li><a href="#management">การจัดการ &amp; สถิติ</a></li>
@@ -617,7 +661,18 @@
     </div>
   </section>
 
+  <!-- ── DIVIDER ──────────────────────────────────── -->
+  <div class="freelance-divider">
+    <div class="freelance-divider-line"></div>
+    <div class="freelance-divider-label">
+      <span class="freelance-divider-tag">นอกเวลาราชการ</span>
+      <span class="freelance-divider-sub">ผลงานที่พัฒนาในฐานะ Freelance</span>
+    </div>
+    <div class="freelance-divider-line"></div>
+  </div>
+
   <!-- ── 4. Freelance ──────────────────────────────── -->
+  <div class="freelance-wrapper">
   <section class="section" id="freelance">
     <div class="section-header">
       <div class="section-icon icon-orange">💼</div>
@@ -642,6 +697,7 @@
 
     </div>
   </section>
+  </div><!-- end freelance-wrapper -->
 
 </main>
 
