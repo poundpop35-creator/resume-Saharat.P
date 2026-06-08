@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สหรัฐ เพชรณิชกุล — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2330;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --accent3: #d2a8ff;
+      --accent4: #ffa657;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --tag-bg: #1f2d3d;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sarabun', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #0c1e3a 0%, #0d1117 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2358a6ff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 40px rgba(88,166,255,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      font-weight: 400;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      color: var(--muted);
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border: 1px solid;
+    }
+
+    .badge-blue  { background: rgba(88,166,255,0.1);  border-color: rgba(88,166,255,0.3);  color: var(--accent); }
+    .badge-green { background: rgba(63,185,80,0.1);   border-color: rgba(63,185,80,0.3);   color: var(--accent2); }
+    .badge-purple{ background: rgba(210,168,255,0.1); border-color: rgba(210,168,255,0.3); color: var(--accent3); }
+    .badge-orange{ background: rgba(255,166,87,0.1);  border-color: rgba(255,166,87,0.3);  color: var(--accent4); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-hint svg { opacity: 0.5; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── NAV ──────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.82rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover { color: var(--text); background: var(--surface2); }
+
+    /* ─── MAIN LAYOUT ──────────────────────────────── */
+    main { max-width: 1100px; margin: 0 auto; padding: 5rem 1.5rem 6rem; }
+
+    /* ─── SECTION HEADING ──────────────────────────── */
+    .section { margin-bottom: 5rem; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .icon-blue   { background: rgba(88,166,255,0.15);  }
+    .icon-green  { background: rgba(63,185,80,0.15);   }
+    .icon-purple { background: rgba(210,168,255,0.15); }
+    .icon-orange { background: rgba(255,166,87,0.15);  }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── CARDS ────────────────────────────────────── */
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+    .card:hover::before { opacity: 1; }
+
+    .card-blue::before   { background: linear-gradient(90deg, var(--accent), var(--accent3)); }
+    .card-green::before  { background: linear-gradient(90deg, var(--accent2), #56d364); }
+    .card-purple::before { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
+    .card-orange::before { background: linear-gradient(90deg, var(--accent4), #ffd580); }
+
+    .card:hover.card-blue   { border-color: rgba(88,166,255,0.4); }
+    .card:hover.card-green  { border-color: rgba(63,185,80,0.4); }
+    .card:hover.card-purple { border-color: rgba(210,168,255,0.4); }
+    .card:hover.card-orange { border-color: rgba(255,166,87,0.4); }
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+
+    .card-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+
+    .num-blue   { background: rgba(88,166,255,0.15);  color: var(--accent); }
+    .num-green  { background: rgba(63,185,80,0.15);   color: var(--accent2); }
+    .num-purple { background: rgba(210,168,255,0.15); color: var(--accent3); }
+    .num-orange { background: rgba(255,166,87,0.15);  color: var(--accent4); }
+
+    .card-status {
+      font-size: 0.7rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    .card-status.demo { color: var(--accent4); border-color: rgba(255,166,87,0.3); background: rgba(255,166,87,0.08); }
+
+    .card h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid rgba(88,166,255,0.3);
+      border-radius: 7px;
+      background: rgba(88,166,255,0.06);
+      transition: all 0.2s;
+      align-self: flex-start;
+      word-break: break-all;
+    }
+
+    .card-link:hover {
+      background: rgba(88,166,255,0.15);
+      border-color: var(--accent);
+    }
+
+    .card-link svg { flex-shrink: 0; }
+
+    .card-link.green  { color: var(--accent2); border-color: rgba(63,185,80,0.3);   background: rgba(63,185,80,0.06); }
+    .card-link.green:hover  { background: rgba(63,185,80,0.15);   border-color: var(--accent2); }
+    .card-link.purple { color: var(--accent3); border-color: rgba(210,168,255,0.3); background: rgba(210,168,255,0.06); }
+    .card-link.purple:hover { background: rgba(210,168,255,0.15); border-color: var(--accent3); }
+    .card-link.orange { color: var(--accent4); border-color: rgba(255,166,87,0.3);  background: rgba(255,166,87,0.06); }
+    .card-link.orange:hover { background: rgba(255,166,87,0.15);  border-color: var(--accent4); }
+
+    .no-link {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ─── TRAINING CARD (full-width list) ─────────── */
+    .training-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .training-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .training-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      border-color: rgba(210,168,255,0.4);
+    }
+
+    .training-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: rgba(210,168,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .training-body { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .training-body h3 { font-size: 0.96rem; font-weight: 600; }
+
+    .training-body p { font-size: 0.84rem; color: var(--muted); }
+
+    /* ─── FOOTER ───────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 640px) {
+      .cards { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="avatar">สห</div>
+  <h1><span>สหรัฐ เพชรณิชกุล</span></h1>
+  <p class="hero-sub">Saharat Petchnichakul</p>
+  <p class="hero-desc">นักวิเคราะห์นโยบายและแผน · นักพัฒนาระบบสารสนเทศ · วิทยากร<br>กรมวิทยาศาสตร์การแพทย์ กระทรวงสาธารณสุข</p>
+  <div class="hero-badges">
+    <span class="badge badge-blue">นโยบายและแผน</span>
+    <span class="badge badge-green">ระบบสารสนเทศ</span>
+    <span class="badge badge-purple">วิทยากร &amp; อบรม</span>
+    <span class="badge badge-orange">Freelance Dev</span>
+  </div>
+  <div class="scroll-hint">
+    <span>เลื่อนดูผลงาน</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<!-- ══ NAV ════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">สหรัฐ เพชรณิชกุล</span>
+    <ul class="nav-links">
+      <li><a href="#policy">นโยบายและแผน</a></li>
+      <li><a href="#management">การจัดการ &amp; สถิติ</a></li>
+      <li><a href="#training">วิทยากร &amp; อบรม</a></li>
+      <li><a href="#freelance">Freelance</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ MAIN ═══════════════════════════════════════════ -->
+<main>
+
+  <!-- ── 1. นโยบายและแผน ──────────────────────────── -->
+  <section class="section" id="policy">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📋</div>
+      <h2 class="section-title">ด้านวิเคราะห์นโยบายและแผน</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cards">
+
+      <div class="card card-blue">
+        <div class="card-top">
+          <span class="card-num num-blue">01</span>
+          <span class="card-status">เผยแพร่แล้ว</span>
+        </div>
+        <h3>แผนยุทธศาสตร์และแผนกลยุทธ์ ระยะ 5 ปี</h3>
+        <p>จัดทำแผนยุทธศาสตร์และแผนกลยุทธ์ระยะ 5 ปี กองแผนงานและวิชาการ กรมวิทยาศาสตร์การแพทย์</p>
+        <a class="card-link" href="https://plan.dmsc.moph.go.th/th/inplan/planstratigy.html" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          plan.dmsc.moph.go.th
+        </a>
+      </div>
+
+      <div class="card card-blue">
+        <div class="card-top">
+          <span class="card-num num-blue">02</span>
+          <span class="card-status">พัฒนาและดูแล</span>
+        </div>
+        <h3>ระบบสารสนเทศเพื่อการบริหารงานเชิงยุทธศาสตร์ (M-SIIS)</h3>
+        <p>ปรับปรุง เพิ่มเติม และพัฒนาระบบสารสนเทศเพื่อการบริหารงานเชิงยุทธศาสตร์และติดตามตัวชี้วัดสำคัญ กรมวิทยาศาสตร์การแพทย์</p>
+        <a class="card-link" href="https://m-siis.dmsc.moph.go.th" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          m-siis.dmsc.moph.go.th
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 2. การจัดการและสถิติ ─────────────────────── -->
+  <section class="section" id="management">
+    <div class="section-header">
+      <div class="section-icon icon-green">📊</div>
+      <h2 class="section-title">งานด้านการจัดการและสถิติ</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cards">
+
+      <div class="card card-green">
+        <div class="card-top">
+          <span class="card-num num-green">01</span>
+          <span class="card-status">ใช้งานจริง</span>
+        </div>
+        <h3>ระบบเก็บสถิติผู้เข้าร่วมงานประชุมวิชาการ ครั้งที่ 34</h3>
+        <p>ระบบเช็กอินและเก็บสถิติผู้เข้าร่วมการประชุมวิชาการวิทยาศาสตร์การแพทย์ ครั้งที่ 34 สำหรับประชาชนทั่วไป</p>
+        <a class="card-link green" href="https://checkin-dmsc-medicalscienceconference.netlify.app/checkin/public" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          ดูระบบ (Public)
+        </a>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-top">
+          <span class="card-num num-green">02</span>
+          <span class="card-status">ใช้งานจริง</span>
+        </div>
+        <h3>ระบบเช็กอิน กรมวิทยาศาสตร์การแพทย์</h3>
+        <p>ระบบบริหารจัดการการเช็กอินเข้าร่วมงาน สำหรับเจ้าหน้าที่กรมวิทยาศาสตร์การแพทย์</p>
+        <a class="card-link green" href="https://checkin-dmsc-medicalscienceconference.netlify.app/checkin/login" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          เข้าสู่ระบบ (Staff)
+        </a>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-top">
+          <span class="card-num num-green">03</span>
+          <span class="card-status demo">Demo</span>
+        </div>
+        <h3>ระบบ Smart E-Queue ระบบเช็กอินและบริหารคิวอัจฉริยะ</h3>
+        <p>ระบบจัดการคิวอัจฉริยะ รองรับการเช็กอิน แสดงสถานะคิวแบบ Real-time สำหรับการจัดงานอบรมและประชุม</p>
+        <a class="card-link green" href="https://pesenter-checkin.netlify.app/queue" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          ทดลองใช้งาน
+        </a>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-top">
+          <span class="card-num num-green">04</span>
+          <span class="card-status">ใช้งานจริง</span>
+        </div>
+        <h3>ระบบจัดการรายชื่อผู้เข้าร่วมประชุม (DMSc Guest Track)</h3>
+        <p>ระบบบริหารจัดการรายชื่อผู้เข้าร่วมประชุม ติดตามสถานะ และจัดการห้องประชุมสำหรับกรมวิทยาศาสตร์การแพทย์</p>
+        <a class="card-link green" href="https://app-manage-rooms.netlify.app" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          app-manage-rooms.netlify.app
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 3. วิทยากรและอบรม ─────────────────────────── -->
+  <section class="section" id="training">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🎤</div>
+      <h2 class="section-title">งานด้านวิทยากร จัดอบรม และงานประชุม</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="training-list">
+
+      <div class="training-item">
+        <div class="training-dot">📊</div>
+        <div class="training-body">
+          <h3>จัดโครงการอบรม "การพัฒนาบุคลากรโดยการนำโปรแกรม Power BI มาใช้ในการวิเคราะห์ข้อมูล"</h3>
+          <p>จัดหลักสูตรอบรมการใช้งาน Microsoft Power BI สำหรับบุคลากรกรมวิทยาศาสตร์การแพทย์ เพื่อพัฒนาทักษะการวิเคราะห์และนำเสนอข้อมูลเชิงภาพ</p>
+          <a class="card-link purple" href="https://www.facebook.com/story.php?story_fbid=954226123567307&id=100069397831347" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ดูรายละเอียดโครงการ
+          </a>
+        </div>
+      </div>
+
+      <div class="training-item">
+        <div class="training-dot">🤖</div>
+        <div class="training-body">
+          <h3>วิทยากรอบรม "การเพิ่มประสิทธิภาพการจัดงานประชุมด้วยระบบ DPTC Guest Track และ AI"</h3>
+          <p>บรรยายและสาธิตการนำระบบ DPTC Guest Track ร่วมกับเทคโนโลยี AI มาเพิ่มประสิทธิภาพการบริหารจัดการงานประชุมและกิจกรรมภายในองค์กร</p>
+          <span class="no-link">ไม่มีลิงก์สาธารณะ</span>
+        </div>
+      </div>
+
+      <div class="training-item">
+        <div class="training-dot">🛡️</div>
+        <div class="training-body">
+          <h3>วิทยากรซักซ้อมแผนบริหารความต่อเนื่องในสถานการณ์ฉุกเฉิน (BCP) กองแผนงานและวิชาการ</h3>
+          <p>เป็นวิทยากรในการซักซ้อมแผน Business Continuity Plan (BCP) ของกองแผนงานและวิชาการ กรมวิทยาศาสตร์การแพทย์ เพื่อเตรียมพร้อมรับมือสถานการณ์ฉุกเฉิน</p>
+          <a class="card-link purple" href="https://www.facebook.com/story.php?story_fbid=1004635711859681&id=100069397831347" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ดูรายละเอียดกิจกรรม
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 4. Freelance ──────────────────────────────── -->
+  <section class="section" id="freelance">
+    <div class="section-header">
+      <div class="section-icon icon-orange">💼</div>
+      <h2 class="section-title">งาน Freelance</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cards">
+
+      <div class="card card-orange">
+        <div class="card-top">
+          <span class="card-num num-orange">01</span>
+          <span class="card-status">ใช้งานจริง</span>
+        </div>
+        <h3>ระบบเก็บข้อมูลพลังงาน SEAFDEC</h3>
+        <p>พัฒนาระบบติดตามและเก็บข้อมูลการใช้พลังงานสำหรับศูนย์พัฒนาการประมงแห่งเอเชียตะวันออกเฉียงใต้ (Southeast Asian Fisheries Development Center) มีแดชบอร์ดแสดงผลแบบ Real-time</p>
+        <a class="card-link orange" href="https://solar-client1.onrender.com/dashboard/SEAFDEC" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          ดู Dashboard
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER ══════════════════════════════════════════ -->
+<footer>
+  <p>© 2025 สหรัฐ เพชรณิชกุล · Saharat Petchnichakul</p>
+  <p style="margin-top:0.3rem;">กรมวิทยาศาสตร์การแพทย์ กระทรวงสาธารณสุข</p>
+</footer>
+
+</body>
+</html>
