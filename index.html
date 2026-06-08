@@ -368,6 +368,25 @@
     .card-link.orange { color: var(--accent4); border-color: rgba(0,121,107,0.3);  background: rgba(0,121,107,0.05); }
     .card-link.orange:hover { background: rgba(0,121,107,0.12);  border-color: var(--accent4); }
 
+    .card-video {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #000;
+      max-height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-video-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+
     .no-link {
       font-size: 0.78rem;
       color: var(--muted);
@@ -746,6 +765,10 @@
         </div>
         <h3>ระบบเก็บข้อมูลพลังงานไฟฟ้าจากโซลาร์เซลล์ สำหรับศูนย์พัฒนาการประมงแห่งเอเชียตะวันออกเฉียงใต้ (SEAFDEC)</h3>
         <p>พัฒนาระบบติดตามและเก็บข้อมูลการใช้พลังงานสำหรับศูนย์พัฒนาการประมงแห่งเอเชียตะวันออกเฉียงใต้ (Southeast Asian Fisheries Development Center) มีแดชบอร์ดแสดงผลแบบ Real-time</p>
+        <div>
+          <p class="card-video-label">▶ วิดีโอสาธิตการใช้งาน</p>
+          <video class="card-video" src="./videos/seafdec.mp4" controls muted loop playsinline></video>
+        </div>
         <a class="card-link orange" href="https://solar-client1.onrender.com/dashboard/SEAFDEC" target="_blank" rel="noopener">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           ดู Dashboard
