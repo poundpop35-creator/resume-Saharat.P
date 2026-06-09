@@ -143,7 +143,12 @@
       font-size: 0.78rem;
       font-weight: 500;
       border: 1px solid;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
+
+    .badge:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
 
     .badge-blue  { background: rgba(21,101,192,0.08); border-color: rgba(21,101,192,0.3);  color: var(--accent); }
     .badge-green { background: rgba(0,131,143,0.08);  border-color: rgba(0,131,143,0.3);   color: var(--accent2); }
@@ -562,10 +567,10 @@
   <p class="hero-sub">Saharat Petchnichakul</p>
   <p class="hero-desc">นักวิเคราะห์นโยบายและแผน<br>พัฒนาระบบสารสนเทศ<br>วิทยากร</p>
   <div class="hero-badges">
-    <span class="badge badge-blue">นโยบายและแผน</span>
-    <span class="badge badge-green">ระบบสารสนเทศ</span>
-    <span class="badge badge-purple">วิทยากร &amp; อบรม</span>
-    <span class="badge badge-orange">Freelance Dev</span>
+    <a href="#policy"     class="badge badge-blue">นโยบายและแผน</a>
+    <a href="#management" class="badge badge-green">ระบบสารสนเทศ</a>
+    <a href="#training"   class="badge badge-purple">วิทยากร &amp; อบรม</a>
+    <a href="#freelance"  class="badge badge-orange">Freelance Dev</a>
   </div>
   <div class="scroll-hint">
     <span>เลื่อนดูผลงาน</span>
