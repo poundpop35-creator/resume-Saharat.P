@@ -614,6 +614,8 @@
       display: block;
       margin: 0 auto 1.2rem;
       border-radius: 8px;
+      width: 220px;
+      height: 220px;
     }
 
     .qr-url {
@@ -982,7 +984,7 @@
   <div class="qr-box" onclick="event.stopPropagation()">
     <h3>สแกนเพื่อดู Portfolio</h3>
     <p>สหรัฐ เพชรณิชกุล</p>
-    <canvas id="qr-canvas"></canvas>
+    <img id="qr-canvas" src="" alt="QR Code" />
     <span class="qr-url" id="qr-url-text"></span>
     <button class="qr-close-btn" onclick="closeQR()">ปิด</button>
   </div>
@@ -994,16 +996,12 @@
   <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
   function openQR() {
     const url = window.location.href.split('#')[0];
     document.getElementById('qr-url-text').textContent = url;
-    QRCode.toCanvas(document.getElementById('qr-canvas'), url, {
-      width: 220,
-      margin: 2,
-      color: { dark: '#0d1f3c', light: '#ffffff' }
-    });
+    const apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&color=0d1f3c&data=' + encodeURIComponent(url);
+    document.getElementById('qr-canvas').src = apiUrl;
     document.getElementById('qr-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
   }
