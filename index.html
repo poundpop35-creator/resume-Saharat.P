@@ -546,6 +546,102 @@
 
     .lightbox-close:hover { opacity: 1; }
 
+    /* ─── QR CODE BUTTON ───────────────────────────── */
+    .qr-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1565c0, #00838f);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(21,101,192,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: #fff;
+    }
+
+    .qr-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 24px rgba(21,101,192,0.5);
+    }
+
+    .qr-btn svg { pointer-events: none; }
+
+    /* ─── QR MODAL ─────────────────────────────────── */
+    .qr-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .qr-modal.active { display: flex; }
+
+    .qr-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem 2rem 1.5rem;
+      text-align: center;
+      max-width: 300px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .qr-box h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0d1f3c;
+      margin-bottom: 0.3rem;
+    }
+
+    .qr-box p {
+      font-size: 0.75rem;
+      color: #567090;
+      margin-bottom: 1.2rem;
+    }
+
+    #qr-canvas {
+      display: block;
+      margin: 0 auto 1.2rem;
+      border-radius: 8px;
+    }
+
+    .qr-url {
+      font-size: 0.7rem;
+      color: #567090;
+      word-break: break-all;
+      background: #f8f4ee;
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .qr-close-btn {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #cce0f5;
+      border-radius: 8px;
+      background: none;
+      color: #1565c0;
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .qr-close-btn:hover { background: #eef5ff; }
+
     /* ─── RESPONSIVE ───────────────────────────────── */
     @media (max-width: 640px) {
       .cards { grid-template-columns: 1fr; }
@@ -871,13 +967,52 @@
   <p>© 2025 สหรัฐ เพชรณิชกุล · Saharat Petchnichakul</p>
 </footer>
 
+<!-- ══ QR BUTTON ══════════════════════════════════════ -->
+<button class="qr-btn" onclick="openQR()" title="แสดง QR Code">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+    <rect x="3" y="14" width="7" height="7"/>
+    <rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/>
+    <rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/>
+  </svg>
+</button>
+
+<!-- ══ QR MODAL ════════════════════════════════════════ -->
+<div class="qr-modal" id="qr-modal" onclick="closeQR()">
+  <div class="qr-box" onclick="event.stopPropagation()">
+    <h3>สแกนเพื่อดู Portfolio</h3>
+    <p>สหรัฐ เพชรณิชกุล</p>
+    <canvas id="qr-canvas"></canvas>
+    <span class="qr-url" id="qr-url-text"></span>
+    <button class="qr-close-btn" onclick="closeQR()">ปิด</button>
+  </div>
+</div>
+
 <!-- ══ LIGHTBOX ═══════════════════════════════════════ -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <span class="lightbox-close" onclick="closeLightbox()">×</span>
   <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
+  function openQR() {
+    const url = window.location.href.split('#')[0];
+    document.getElementById('qr-url-text').textContent = url;
+    QRCode.toCanvas(document.getElementById('qr-canvas'), url, {
+      width: 220,
+      margin: 2,
+      color: { dark: '#0d1f3c', light: '#ffffff' }
+    });
+    document.getElementById('qr-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeQR() {
+    document.getElementById('qr-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
   function openLightbox(src) {
     document.getElementById('lightbox-img').src = src;
     document.getElementById('lightbox').classList.add('active');
@@ -887,7 +1022,7 @@
     document.getElementById('lightbox').classList.remove('active');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeQR(); } });
 </script>
 </body>
 </html>
