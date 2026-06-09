@@ -485,6 +485,62 @@
       font-size: 0.8rem;
     }
 
+    /* ─── CARD IMAGE THUMBNAIL ────────────────────── */
+    .card-thumb {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      max-height: 160px;
+      cursor: zoom-in;
+      transition: opacity 0.2s;
+      display: block;
+    }
+
+    .card-thumb:hover { opacity: 0.85; }
+
+    .card-img-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    /* ─── LIGHTBOX ─────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
     /* ─── RESPONSIVE ───────────────────────────────── */
     @media (max-width: 640px) {
       .cards { grid-template-columns: 1fr; }
@@ -548,7 +604,11 @@
           <span class="card-status">เผยแพร่แล้ว</span>
         </div>
         <h3>แผนยุทธศาสตร์และแผนกลยุทธ์ ระยะ 5 ปี (ปีงบประมาณ 2569-2573)</h3>
-        <p>จัดทำแผนยุทธศาสตร์และแผนกลยุทธ์ระยะ 5 ปี กองแผนงานและวิชาการ กรมวิทยาศาสตร์การแพทย์</p>
+        <p>จัดทำแผนยุทธศาสตร์และแผนกลยุทธ์ระยะ 5 ปี กองแผนงานและวิชาการ กรมวิทยาศาสตร์การแพทย์ โดยรับผิดชอบ<strong>เป้าประสงค์ที่ 2</strong> มีระบบสารสนเทศบูรณาการด้านยุทธศาสตร์และงบประมาณ เพื่อสนับสนุนการตัดสินใจเชิงนโยบายอย่างมีเสถียรภาพ</p>
+        <div>
+          <p class="card-img-label">🖼 แผนกลยุทธ์กองแผนงานและวิชาการ (กดเพื่อขยาย)</p>
+          <img class="card-thumb" src="./images/strategic-plan.jpeg" alt="แผนกลยุทธ์กองแผนงานและวิชาการ" onclick="openLightbox(this.src)" />
+        </div>
         <a class="card-link" href="https://plan.dmsc.moph.go.th/th/inplan/planstratigy.html" target="_blank" rel="noopener">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           plan.dmsc.moph.go.th
@@ -790,5 +850,23 @@
   <p>© 2025 สหรัฐ เพชรณิชกุล · Saharat Petchnichakul</p>
 </footer>
 
+<!-- ══ LIGHTBOX ═══════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 </body>
 </html>
